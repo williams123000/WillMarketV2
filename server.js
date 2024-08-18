@@ -40,68 +40,6 @@ if (!fs.existsSync(clavedeptoprocdepto)) {
     fs.writeFileSync(clavedeptoprocdepto, '');
 }
 
-
-/*
-// Ruta para guardar el producto en Productos.txt
-app.post('/save-product', (req, res) => {
-
-    // Obtener los datos del producto del cuerpo de la solicitud 
-    const productData = req.body;
-
-    // Leer el archivo para encontrar la última clave
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.json({ success: false });
-        }
-
-        let nextKey = 1;
-
-        const lines = data.trim().split('\n');
-        // Si hay más de una línea, obtener la clave del último producto y sumarle 1 para la nueva clave 
-        if (lines.length > 1) {
-            const lastLine = lines[lines.length - 1];
-            const lastKey = parseInt(lastLine.split(',')[0]);
-            nextKey = lastKey + 1;
-        }
-
-        // Crear la línea con los datos del producto a guardar 
-        const productLine = `${nextKey},${productData.name},${productData.provider}\n`;
-
-        // Agregar la línea al archivo de productos 
-        fs.appendFile(filePath, productLine, (err) => {
-            if (err) {
-                console.error('Error al guardar el producto:', err);
-                return res.json({ success: false });
-            }
-            res.json({ success: true, key: nextKey });
-        });
-    });
-});*/
-
-
-
-// Ruta para obtener los productos
-/*app.get('/get-products', (req, res) => {
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.json({ success: false });
-        }
-
-        // Convertir el contenido del archivo a un arreglo de objetos con los productos 
-        const lines = data.trim().split('\n');
-        // Crear un objeto por cada línea con los datos del producto 
-        const products = lines.slice(1).map(line => {
-            const [key, name, provider] = line.split(',');
-            return { key, name, provider };
-        });
-
-        // Enviar la lista de productos como respuesta 
-        res.json({ success: true, products });
-    });
-});*/
-
 // Ruta para guaradr el producto
 app.post('/save-product', async (req, res) => {
     // Obtener los datos del producto del cuerpo de la solicitud
@@ -145,47 +83,6 @@ app.get('/get-products', async (req, res) => {
 }
 );
 
-
-/*
-// Ruta para eliminar un producto
-app.post('/delete-product', (req, res) => {
-    // Obtener la clave del producto a eliminar 
-    const { key } = req.body;
-
-    // Leer el archivo y eliminar el producto con la clave indicada
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.json({ success: false, message: 'Error al leer el archivo.' });
-        }
-
-        // Buscar el producto con la clave indicada y eliminarlo del archivo 
-        const lines = data.trim().split('\n');
-        const header = lines[0];
-        // Filtrar las líneas para eliminar el producto con la clave indicada 
-        const products = lines.slice(1).filter(line => {
-            const [productKey] = line.split(',');
-            return productKey !== key;
-        });
-
-        // Verificar si se eliminó algún producto 
-        if (products.length < lines.length - 1) {
-            // Producto encontrado y eliminado
-            fs.writeFile(filePath, `${header}\n${products.join('\n')}\n`, (err) => {
-                if (err) {
-                    console.error('Error al escribir el archivo:', err);
-                    return res.json({ success: false, message: 'Error al escribir el archivo.' });
-                }
-                res.json({ success: true });
-            });
-        } else {
-            // Producto no encontrado
-            res.json({ success: false, message: 'Producto no encontrado.' });
-        }
-    });
-});*/
-
-// Ruta para eliminar un producto
 // Ruta para eliminar un producto
 app.post('/delete-product', async (req, res) => {
     const { key } = req.body;
@@ -217,51 +114,6 @@ app.post('/delete-product', async (req, res) => {
     res.json({ success: true });
 });
 
-
-
-
-/*
-// Ruta para guardar el departamento en deptos.txt
-app.post('/save-department', (req, res) => {
-    // Obtener los datos del departamento del cuerpo de la solicitud
-    const depData = req.body;
-    console.log(depData);
-
-    // Leer el archivo
-    fs.readFile(depFilePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.json({ success: false });
-        }
-
-        const lines = data.trim().split('\n');
-
-        // Verificar si la clave del departamento ya existe
-        const depExists = lines.some(line => {
-            const [key] = line.split(',');
-            return key === depData.key;
-        });
-
-        if (depExists) {
-            return res.json({ success: false, message: 'La clave del departamento ya existe.' });
-        }else{
-            // Crear la línea con los datos del departamento a guardar
-            const depLine = `${depData.key},${depData.name},${depData.manager}\n`;
-
-            // Agregar la línea al archivo de departamentos
-            fs.appendFile(depFilePath, depLine, (err) => {
-                if (err) {
-                    console.error('Error al guardar el departamento:', err);
-                    return res.json({ success: false });
-                }
-                res.json({ success: true, key: depData.key });
-            });
-        }
-    });
-} );
-
-*/
-
 // Ruta para guardar el departamento
 app.post('/save-department', async (req, res) => {
     // Obtener los datos del departamento del cuerpo de la solicitud
@@ -282,31 +134,6 @@ app.post('/save-department', async (req, res) => {
     res.json({ success: true, key: depData.key });
 });
 
-
-/*
-// Ruta para obtener los departamentos
-app.get('/get-departments', (req, res) => {
-    fs.readFile(depFilePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.json({ success: false });
-        }
-
-        // Convertir el contenido del archivo a un arreglo de objetos con los departamentos
-        const lines = data.trim().split('\n');
-        // Crear un objeto por cada línea con los datos del departamento
-        const departments = lines.slice(1).map(line => {
-            const [key, name, manager] = line.split(',');
-            return { key, name, manager };
-        });
-
-        // Enviar la lista de departamentos como respuesta
-        res.json({ success: true, departments });
-    });
-}
-);
-*/
-
 // Ruta para obtener los departamentos
 app.get('/get-departments', async (req, res) => {
     // Obtener los departamentos de la tabla 'Departamentos' de Supabase
@@ -325,48 +152,6 @@ app.get('/get-departments', async (req, res) => {
 }
 );
 
-
-/*
-// Ruta para eliminar un departamento
-app.post('/delete-department', (req, res) => {
-    // Obtener la clave del departamento a eliminar
-    const { key } = req.body;
-
-    // Leer el archivo y eliminar el departamento con la clave indicada
-    fs.readFile(depFilePath, 'utf8', (err, data) => {
-        if (err) {
-            console.error('Error al leer el archivo:', err);
-            return res.json({ success: false, message: 'Error al leer el archivo.' });
-        }
-
-        // Buscar el departamento con la clave indicada y eliminarlo del archivo
-        const lines = data.trim().split('\n');
-        const header = lines[0];
-        // Filtrar las líneas para eliminar el departamento con la clave indicada
-        const departments = lines.slice(1).filter(line => {
-            const [departmentKey] = line.split(',');
-            return departmentKey !== key;
-        });
-
-        // Verificar si se eliminó algún departamento
-        if (departments.length < lines.length - 1) {
-            // Departamento encontrado y eliminado
-            fs.writeFile(depFilePath, `${header}\n${departments.join('\n')}\n`, (err) => {
-                if (err) {
-                    console.error('Error al escribir el archivo:', err);
-                    return res.json({ success: false, message: 'Error al escribir el archivo.' });
-                }
-                res.json({ success: true });
-            });
-        } else {
-            // Departamento no encontrado
-            res.json({ success: false, message: 'Departamento no encontrado.' });
-        }
-    });
-});
-*/
-
-// Ruta para eliminar un departamento
 // Ruta para eliminar un departamento
 app.post('/delete-department', async (req, res) => {
     const { key } = req.body;
@@ -538,8 +323,6 @@ app.post('/save-price', async (req, res) => {
 });
 
 
-
-// Ruta para consultar el precio de un producto en un departamento
 // Ruta para consultar el precio de un producto en un departamento
 app.post('/consult-price', async (req, res) => {
     const { claveDept } = req.body;
