@@ -1,0 +1,6 @@
+Clave,Producto,Proveedor
+1,Arroz,Mario García 
+2,Frijol,Elena Perez
+3,Cinta de aislar,Jose Aguilar
+4,Cobija,Juan Sanchez
+5,Foco de 40 Watss,Silvia Lopez

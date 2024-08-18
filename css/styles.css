@@ -1,0 +1,41 @@
+/* Estilos para la fuente personalizada */
+@font-face {
+    font-family: MiFuente;
+    /* Nombre que le das a tu fuente */
+    src: url('/fuentes/Barlow-Black.ttf') format('opentype');
+    /* Ruta a tu archivo de fuente .otf */
+}
+
+/* Estilos para la fuente personalizada */
+@font-face {
+    font-family: Products;
+    /* Nombre que le das a tu fuente */
+    src: url('/fuentes/Barlow-ExtraLight.ttf') format('opentype');
+    /* Ruta a tu archivo de fuente .otf */
+}
+
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: MiFuente, Arial, sans-serif;
+    /* Utiliza tu fuente personalizada como primera opción */
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+footer {
+    background-color: #343A40;
+    padding: 6px 0;
+    text-align: center;
+    color: #ffffff;
+}

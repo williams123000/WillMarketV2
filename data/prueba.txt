@@ -1,0 +1,20 @@
+Clave,Producto,Proveedor
+1,Arroz,Mario García 
+2,Frijol,Elena Perez
+3,Cinta de aislar,Jose Aguilar
+4,Cobija,Juan Sanchez
+5,Foco de 40 Watss,Silvia Lopez
+
+
+
+Clave,Nombre,Encargado
+1-Ab,Abarrotes,Mario Bezares
+2-Tlapa,Tlapalería,Arnulfo Garcia
+3-Blan,Blancos,Elena Alcantara
+4-Pape,Papelería,Martha Sanchez
+
+
+Producto,Precio,Departamento
+2,-1,1-Ab
+3,-1,2-Tlapa
+1,-1,1-Ab
